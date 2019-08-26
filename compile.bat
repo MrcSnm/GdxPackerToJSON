@@ -1,0 +1,1 @@
+javac AtlasToJSON.java  && java AtlasToJSON UI.atlas
