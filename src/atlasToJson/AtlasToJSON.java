@@ -103,7 +103,7 @@ public class AtlasToJSON
       frame = frame + ",";
       return frame;
    }
-
+  
    public static String addSpriteSourceSize(int w, int h) {
       String spriteSourceSize = "";
       spriteSourceSize = spriteSourceSize + enter() + tab() + tab() + quote() + "spriteSourceSize" + quote() + " : {";
@@ -277,6 +277,7 @@ public class AtlasToJSON
             
             String newFileName = getFileName(outputFolder);
             String resultFolder = getPath(outputFolder);
+            System.out.println(filename);
             String fileContent = fileRead(filename);
 
             if (fileContent != "") 

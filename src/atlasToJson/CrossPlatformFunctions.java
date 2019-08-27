@@ -55,6 +55,9 @@ public class CrossPlatformFunctions
       }
       f.setVisible(true);
       String fileSelected = f.getFile();
+      if(fileSelected == null || fileSelected == "")
+    	  return "";
+      fileSelected = f.getDirectory() + fileSelected;
       return fileSelected;
    }
 
