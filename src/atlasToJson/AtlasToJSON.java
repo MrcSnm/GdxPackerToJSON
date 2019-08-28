@@ -113,8 +113,12 @@ public class AtlasToJSON {
          String[] buffer = new String[2];
          int currOriginX = 0;
          int currOriginY = 0;
+
          int currWidth = 0;
          int currHeight = 0;
+         int origWidth = 0;
+         int origHeight = 0;
+
          String line = file.readLine();
          resultingContent = resultingContent + tab() + quote() + "filename" + quote() + " : " + quote() + line + quote()
                      + ",";
@@ -137,8 +141,12 @@ public class AtlasToJSON {
                line = line.replaceFirst("orig: ", "");
                line = line.replaceAll(" ", "");
                buffer = line.split(",");
-               currWidth = Integer.parseInt(buffer[0]);
-               currHeight = Integer.parseInt(buffer[1]);
+               origWidth = Integer.parseInt(buffer[0]);
+               origHeight = Integer.parseInt(buffer[1]);
+               //@WIP
+               //resultingContent += enter() + tab() + tab() + quote() + "trimmed" + quote() + ":" + " ";
+               //resultingContent+= (origWidth != currWidth || origHeight != currHeight) + ",";
+
             }
             else if (line.contains("size:")) {
                line = line.replaceFirst("size: ", "");
@@ -153,8 +161,8 @@ public class AtlasToJSON {
             else {
                if (currWidth != 0 && currHeight != 0) {
                   resultingContent = resultingContent + addFrame(currOriginX, currOriginY, currWidth, currHeight);
-                  resultingContent = resultingContent + addSpriteSourceSize(currWidth, currHeight);
-                  resultingContent = resultingContent + addSourceSize(currWidth, currHeight);
+                  resultingContent = resultingContent + addSpriteSourceSize(origWidth, origHeight);
+                  resultingContent = resultingContent + addSourceSize(origWidth, origHeight);
                   resultingContent = resultingContent + "\n";
                }
                
@@ -162,6 +170,8 @@ public class AtlasToJSON {
                currOriginY = 0;
                currWidth = 0;
                currHeight = 0;
+               origWidth = 0;
+               origHeight = 0;
                resultingContent = resultingContent + "\n\t},\n\t{";
                resultingContent = resultingContent + enter() + tab() + tab() + quote() + "filename" + quote() + " : "
                            + quote() + line + quote() + ",";
